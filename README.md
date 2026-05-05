@@ -52,3 +52,10 @@ filmflow/
 │ └── style.css # Стили приложения
 │
 └── media/ # Медиафайлы (постеры, логотипы, видео)
+
+## 🚀 Быстрый старт
+
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/your-username/filmflow.git
+   cd filmflow
