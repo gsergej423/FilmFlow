@@ -57,5 +57,5 @@ filmflow/
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/your-username/filmflow.git
+   git clone https://github.com/gsergej423/FilmFlow
    cd filmflow
