@@ -207,7 +207,7 @@
     apply();
   }
 
-  // Обработчик формы каталога (стиль checkForm)
+  // Начало_Обработчик формы каталога (стиль checkForm)
   function handleCatalogSubmit(event, form) {
     event.preventDefault();
 
@@ -273,7 +273,9 @@
       if(count) count.textContent = `Найдено: ${list.length}`;
     }
   }
-
+  
+  //Конец обработчика форм.
+    
   // ===== page: title (с поддержкой постера) =====
   function initTitle(){
     const id = qs("id");
