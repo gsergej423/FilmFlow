@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>FilmFlow — Витрина ТНТ</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        body[data-page="tnt"] {
+            background:
+                radial-gradient(900px 500px at 10% 0%, rgba(255,45,85,.16), transparent 55%),
+                radial-gradient(900px 500px at 90% 10%, rgba(180,0,30,.10), transparent 55%),
+                var(--bg);
+        }
+        .showcase-hero {
+            border: 1px solid rgba(255,45,85,.28);
+            border-radius: 26px;
+            padding: 28px;
+            background: linear-gradient(135deg, rgba(255,45,85,.20), rgba(255,255,255,.02));
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
+        }
+        .showcase-hero-logo {
+            width: 110px; height: 110px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #ff2d55, #b3001b);
+            display: grid; place-items: center;
+            font-weight: 900; font-size: 34px; color: white;
+            box-shadow: 0 10px 30px rgba(255,45,85,.45);
+            flex-shrink: 0;
+            letter-spacing: 1px;
+        }
+        .showcase-hero-text { flex: 1; min-width: 240px; }
+        .showcase-hero-text h1 { margin: 0 0 8px; font-size: 34px; }
+        .showcase-hero-text p { margin: 0; color: var(--muted); line-height: 1.55; max-width: 640px; }
+        .showcase-hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .showcase-card {
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform .15s ease, border-color .15s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .showcase-card:hover { transform: translateY(-3px); border-color: rgba(255,45,85,.45); }
+        .showcase-poster {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .showcase-poster::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(11,15,20,.85));
+        }
+        .showcase-badge {
+            position: absolute;
+            top: 12px; left: 12px;
+            background: rgba(255,45,85,.9);
+            color: #fff;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            z-index: 2;
+        }
+        .showcase-title-over {
+            position: absolute;
+            bottom: 12px; left: 12px; right: 12px;
+            font-weight: 800;
+            font-size: 15px;
+            line-height: 1.25;
+            text-shadow: 0 6px 20px rgba(0,0,0,.7);
+            z-index: 2;
+        }
+        .showcase-body { padding: 14px; }
+        .showcase-desc { font-size: 13px; color: var(--muted); line-height: 1.45; margin: 0; }
+        .showcase-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+        .tag-mini {
+            font-size: 12px;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.03);
+        }
+        .tag-mini.rating {
+            color: #ffd60a;
+            border-color: rgba(255,214,10,.25);
+            background: rgba(255,214,10,.10);
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body data-page="tnt">
+<header>
+  <div class="container">
+    <div class="topbar">
+      <a class="logo" href="index.html"><span class="logo-badge">F</span> FilmFlow</a>
+      <nav>
+        <a class="navlink" data-nav="home" href="index.html">Главная</a>
+        <a class="navlink" data-nav="catalog" href="catalog.html">Каталог</a>
+        <a class="navlink" data-nav="magic" href="magic.html">Магия</a>
+        <a class="navlink" data-nav="watch" href="watch.html">Смотреть</a>
+        <a class="navlink" data-nav="music" href="music.html">Музыка</a>
+        <a class="navlink" data-nav="tv" href="tv.html">ТВ</a>
+        <a class="navlink" data-nav="profile" href="profile.html">Профиль</a>
+        <a class="navlink" data-nav="collection" href="collection.html">Коллекция</a>
+        <a class="navlink external" href="https://rutube.ru/" target="_blank" rel="noopener noreferrer">🎬 Rutube</a>
+        <a class="navlink external" href="https://vkvideo.ru/" target="_blank" rel="noopener noreferrer">📺 VK Видео</a>
+      </nav>
+      <div class="spacer"></div>
+      <div class="row" style="gap:10px">
+        <div class="avatar" id="navAvatar">Г</div>
+        <div class="small"><span id="navName">Гость</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="showcase-hero">
+    <div class="showcase-hero-logo">ТНТ</div>
+    <div class="showcase-hero-text">
+      <h1>Витрина ТНТ</h1>
+      <p>Комедийные сериалы, шоу и легендарные проекты главного развлекательного канала. Смотри подборку лучших премьер и классики ТНТ прямо на FilmFlow.</p>
+      <div class="showcase-hero-actions">
+        <a class="pill accent" href="channel.html?id=ch9">📺 Перейти на канал ТНТ</a>
+        <a class="pill" href="catalog.html">← В каталог</a>
+        <a class="pill" href="index.html">🏠 На главную</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Сериалы и шоу ТНТ</h2>
+    <div class="showcase-grid">
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #7a0f1e, #2a0408);">
+          <span class="showcase-badge">ХИТ</span>
+          <div class="showcase-title-over">Реальные пацаны</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Комедийный сериал о жителях Перми и их весёлых буднях.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Комедия</span>
+            <span class="tag-mini rating">8.1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #3a1b4a, #120616);">
+          <span class="showcase-badge">КЛАССИКА</span>
+          <div class="showcase-title-over">Универ</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Студенческая общага, где каждый день — новое приключение.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Ситком</span>
+            <span class="tag-mini rating">7.9</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #123a4a, #041318);">
+          <span class="showcase-badge">СЕРИАЛ</span>
+          <div class="showcase-title-over">Интерны</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Медицинская комедия о буднях интернов и их строгого наставника.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Комедия</span>
+            <span class="tag-mini rating">8.3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #4a2b12, #180a04);">
+          <span class="showcase-badge">ХИТ</span>
+          <div class="showcase-title-over">Физрук</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Бывший бандит становится учителем физкультуры и меняет школу.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Комедия</span>
+            <span class="tag-mini rating">7.7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #2b1240, #0c0313);">
+          <span class="showcase-badge">ДРАМА</span>
+          <div class="showcase-title-over">Ольга</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">История сильной женщины, которая тянет на себе всю семью.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Драма</span>
+            <span class="tag-mini rating">7.8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #1f3a0f, #081302);">
+          <span class="showcase-badge">ШОУ</span>
+          <div class="showcase-title-over">Stand Up</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Юмористическое шоу с лучшими стендап-комиками страны.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Юмор</span>
+            <span class="tag-mini rating">8.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #0f2b4a, #03101c);">
+          <span class="showcase-badge">СЕРИАЛ</span>
+          <div class="showcase-title-over">Домашний арест</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Мэра небольшого города отправляют под домашний арест.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Комедия</span>
+            <span class="tag-mini rating">7.6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-poster" style="background: linear-gradient(135deg, #4a0f2b, #17030c);">
+          <span class="showcase-badge">ШОУ</span>
+          <div class="showcase-title-over">Comedy Club</div>
+        </div>
+        <div class="showcase-body">
+          <p class="showcase-desc">Легендарное юмористическое шоу, покорившее миллионы зрителей.</p>
+          <div class="showcase-meta">
+            <span class="tag-mini">Юмор</span>
+            <span class="tag-mini rating">8.4</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="small">FilmFlow — витрина канала ТНТ. Все права на контент принадлежат правообладателям.</div>
+  </footer>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
